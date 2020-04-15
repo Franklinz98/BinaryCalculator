@@ -8,7 +8,8 @@ class MyHome extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: Color(0xffffccaa),
+           accentColor: Color(0xffff5448),
         ),
         home: Scaffold(
             appBar: AppBar(

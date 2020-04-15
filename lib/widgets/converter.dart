@@ -1,3 +1,5 @@
+import 'package:demo_app/widgets/bin2dec.dart';
+import 'package:demo_app/widgets/dec2bin.dart';
 import 'package:flutter/material.dart';
 
 class Converter extends StatefulWidget {
@@ -6,67 +8,54 @@ class Converter extends StatefulWidget {
 }
 
 class _ConverterState extends State<Converter> {
-  String _binary = "11";
-  String _decimal = "3"; // _decimal = int.parse(_binary, radix: 2).toRadixString(10);
+  String _buttonText = "Binary -> Decimal";
+  int _widgetID = 0;
+  Widget _widget = Bin2Dec();
 
-  void _onPressed() {
+  void _swapWidget() {
+    setState(() {
+      switch (_widgetID) {
+        case 0:
+          _buttonText = "Decimal -> Binary";
+          _widgetID = 1;
+          _widget = Dec2Bin();
+          break;
+        case 1:
+          _buttonText = "Binary -> Decimal";
+          _widgetID = 0;
+          _widget = Bin2Dec();
+          break;
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-     child: 
-        Column(
+      child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
-               alignment: Alignment.centerLeft,
-              child: Text("Binary -> Decimal")
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.all(12.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color(0xffffffff),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0.00, 3.00),
+                      color: Color(0xff000000).withOpacity(0.16),
+                      blurRadius: 6,
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(4.00),
+                ),
+                child: MaterialButton(
+                    child: Text('$_buttonText'), onPressed: (){_swapWidget();}),
               ),
-        Container(
-              padding: const EdgeInsets.all(8.0),
-              alignment: Alignment.centerRight,
-              child: Text(
-                '$_binary',
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Color(int.parse("#FF5722".replaceAll('#', '0xff'))),
-                    fontSize: 35),
-              )),
-            Text("3"),
-            Row(
-                children: <Widget>[
-                  MaterialButton(
-                    child: Text("1"),
-                    onPressed: () {},
-                  ),
-                  MaterialButton(
-                    child: Text("0"),
-                    onPressed: () {},
-                  ),
-                ]),
-
-
-          Expanded(
-            flex: 1,
-            child: Container(
-              padding: const EdgeInsets.all(8.0),
-              child: MaterialButton(
-                  color: Color(int.parse("#0069C0".replaceAll('#', '0xff'))),
-                  onPressed: () {
-                   
-                  },
-                  child: Text("Reset",
-                      style: new TextStyle(
-                        fontSize: 20.0,
-                        color: Colors.white,
-                      ))),
             ),
-          ),
+            Expanded(child: _widget),
           ]),
-
-
     );
   }
 }
