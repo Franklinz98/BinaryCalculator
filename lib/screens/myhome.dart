@@ -1,20 +1,24 @@
 import 'package:demo_app/widgets/converter.dart';
 import 'package:flutter/material.dart';
 
-class MyHome extends StatelessWidget {
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primaryColor: Color(0xffffccaa),
-           accentColor: Color(0xffff5448),
+      debugShowCheckedModeBanner: false,
+      title: 'MisiónTIC 2022',
+      theme: ThemeData(
+        primaryColor: Color(0xff4264b4),
+        accentColor: Color(0xff1d2448),
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('MisiónTIC 2022 - Móvil'),
         ),
-        home: Scaffold(
-            appBar: AppBar(
-              title: Text('Programación Móvil 2020'),
-            ),
-            body: Center(child: Converter())));
+        body: Center(
+          child: Converter(),
+        ),
+      ),
+    );
   }
 }
